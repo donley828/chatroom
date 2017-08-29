@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/inputpanel.css">
+    <link rel="stylesheet" href="./css/loginpanel.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js"></script>
+    <title>Lchat</title>
+</head>
+
+<body>
+    <header class="page-header header">
+        <h1>Lchat <small>a simple chatroom used nodejs and express</small></h1>
+    </header>
+    <div class="wrapper">
+        <div>
+            <p id="status"></p>
+            <div class="chat-panel" id="msg"></div>
+            <div class="input-panel">
+                <div class="btn-gruop" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" id="emoBtn">emojj</button>
+                    <button type="file" class="btn btn-default" id="imgBtn">image</button>
+                    <button type="button" class="btn btn-default" id="clearBtn">clear</button>
+                    <button type="button" class="btn btn-default" id="sendBtn">enter</button>
+                </div>
+                <textarea id="input-area"></textarea>
+            </div>
+        </div>
+        <div class="user-list sm-hide"></div>
+    </div>
+    <section class="loginpanel" id="loginpanel">
+        <p id="info">Connecting to Server...</p>
+        <div id="login">
+            <p><span class="glyphicon glyphicon-user"></span>Pick up a Nickname: !!</p>
+            <div class="input-group">
+                <input type="text" class="form-control" id="nickstr" placeholder="Your Nickname">
+                <span>
+                  <button class="btn btn-default" type="button" id="connBtn">Go!</button>
+            </span>
+            </div>
+        </div>
+    </section>
+    <script>
+        var socket = io.connect(); //connect to server
+        var button = document.getElementById('sendBtn');
+        button.onclick = function () {
+            socket.emit('foo', 'hello');
+        }
+    </script>
+    <script src="./js/chat.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+.input-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-panel>textarea {
+    flex: 0 0 85px;
+}
+.timespan {
+    color: gray;
+}

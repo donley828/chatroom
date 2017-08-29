@@ -1,0 +1,48 @@
+.header {
+    text-align: center;
+}
+.wrapper {
+    display: flex;
+    flex: 1 0 auto;
+
+    width: 697px;
+    height: 500px;
+    margin: 0 auto;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px #EEEEEE;
+}
+.wrapper>div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1 0 523px;
+    border: 1px solid #EEEEEE;
+}
+.chat-panel {
+    flex: 0 0 350px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    overflow: auto;
+}
+.input-panel {
+    flex: 0 0 150px;
+}
+.wrapper>div:nth-child(2) {
+    height: 100%;
+    flex: 0 0 174px;
+}
+@media screen and (max-width: 718px) {
+    .sm-hide {
+        display: none;
+    }
+    .wrapper {
+        width: 100%;
+    }
+    .wrapper>div:nth-child(1) {
+        flex: 1 0 100%;
+    }
+    .input-panel>textarea {
+        width: 100%;
+    }
+}
