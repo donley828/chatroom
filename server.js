@@ -8,7 +8,7 @@ var io = require('socket.io').listen(server);//将socke模块与服务器进行�
 
 
 app.use('/', express.static(__dirname + '/www'));
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 
 //socket
 io.on('connection', function(socket) {
