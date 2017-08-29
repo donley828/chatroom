@@ -25,13 +25,13 @@ Chat.prototype = {
                 that._displayNewMsg('Me', msg); //自己窗口显示
             }
         }, false);
-        EventUtil.addHandler(sendBtn, "keyup", function(event) {}); //绑定键码
+         //绑定键码
 
         //图片发送
         document.getElementById('imgBtn').addEventListener('change', function() {
             //检查是否有图片选中
             if (this.files.lenght != 0) {
-                
+
             }
         });
 
