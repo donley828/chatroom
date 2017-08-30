@@ -41,7 +41,7 @@ img {
 }
 #imgBtn {
     position: absolute;
-    visibility: hidden;
+    opacity: 0;
     top: 0;
     width: 100%;
     height: 100%;
@@ -55,6 +55,7 @@ img {
 .input-panel>div>label {
     position: relative;
     width: 64px;
+    height: 34px;
 }
 .wrapper>div:nth-child(2) {
     height: 100%;

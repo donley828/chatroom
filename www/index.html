@@ -32,6 +32,17 @@
                     <label for="imgBtn">
                         <input type="button" value="image" class="btn btn-default">
                         <input type="file" id="imgBtn"  value="image" class="btn btn-default">
+                        <script>
+                        $(function() {
+                            $("#imgBtn").mouseover(function() {
+                                $(this).siblings().css("background-color","#EEEEEE");
+                            });
+                            $("#imgBtn").mouseleave(function() {
+                                $(this).siblings().css("background-color","white");
+                            });
+                            
+                        });
+                        </script>
                     </label>
                     <button type="button" class="btn btn-default" id="clearBtn">clear</button>
                     <button type="button" class="btn btn-default" id="sendBtn">enter</button>
