@@ -35,6 +35,10 @@ io.on('connection', function(socket) {
         //显示
         socket.broadcast.emit('newMsg', socket.nickname, msg);
     });
+    //接收图片
+    socket.on('img', function(imgData) {
+        socket.broadcast.emit('newImg', socket.nickname, imgData);
+    });
 }); 
 
 

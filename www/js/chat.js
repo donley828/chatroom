@@ -30,10 +30,24 @@ Chat.prototype = {
         //图片发送
         document.getElementById('imgBtn').addEventListener('change', function() {
             //检查是否有图片选中
-            if (this.files.lenght != 0) {
-
+            if (this.files.length != 0) {
+                //获取文件使用filereader读取
+                var file = this.files[0],
+                    reader = new FileReader();
+                if (!reader) {
+                    that._displayNewMsg('system', 'Your browser doesn\'t support fileReader', 'red');
+                    this.value = '';
+                    return;
+                }
+                reader.onload = function(e) {
+                    //读取成功
+                    this.value = '';
+                    that.socket.emit('img', e.target.result);
+                    that._displayImage('me', e.target.result);
+                }
+                reader.readAsDataURL(file);
             }
-        });
+        }, false);
 
         //监听connect事件
         this.socket.on('connect', function () {
@@ -42,9 +56,10 @@ Chat.prototype = {
             document.getElementById('nickstr').focus();
             document.getElementById('connBtn').addEventListener('click', function () {
                 var nickName = document.getElementById('nickstr').value;
-
-                if (nickName.trim().length != 0) {
+                if (nickName.trim().length != 0 && nickName.trim().length <=7 ) {
                     that.socket.emit('login', nickName);
+                } else if (nickName.trim().length > 7) {
+                    alert("Within 7 char");
                 } else {
                     document.getElementById('nickstr').focus();
                 }
@@ -73,6 +88,10 @@ Chat.prototype = {
         this.socket.on('newMsg', function (user, msg) {
             that._displayNewMsg(user, msg);
         });
+        //接收显示图片
+        this.socket.on('newImg', function(user, img) {
+            that._displayImage(user, img);
+        });
 
     },
     _displayNewMsg: function (user, msg, color) {
@@ -81,6 +100,15 @@ Chat.prototype = {
             date = new Date().toTimeString().substr(0, 8);
         msgToDisplay.style.color = color || '#000';
         msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+        container.appendChild(msgToDisplay);
+        container.scrollTop = container.scrollHeight;
+    },
+    _displayImage: function (user, imgData, color) {
+        var container = document.getElementById('msg'),
+            msgToDisplay = document.createElement('p'),
+            date = new Date().toTimeString().substr(0, 8);
+        msgToDisplay.style.color = color || '#000';
+        msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span><br/>' + '<a href="' + imgData + '" target="_blank"><img src="' + imgData + '"/></a>';
         container.appendChild(msgToDisplay);
         container.scrollTop = container.scrollHeight;
     }
